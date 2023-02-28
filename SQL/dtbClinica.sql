@@ -39,3 +39,11 @@ create table Consulta(
 	dataCons date,
     hora time
     );
+
+alter table Consulta add idCodm int;
+alter table Consulta add constraint fk_idcodm foreign key (idCodm) references Medico(codm);
+
+alter table Consulta add idCodp int;
+alter table Consulta add constraint fk_idcodp foreign key (idCodp) references Paciente(codp);
+
+
