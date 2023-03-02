@@ -31,76 +31,115 @@ create table Servidor(
 		nome, data_servico, salario, cod_org)
     values
 		('Ana', '2003-10-09', 1200, 1),
-        ('Bruno', '2002-01-09', 1000, 222),
-        ('Carlos', '2008-11-09', 1500, 4),
+        ('Carlos', '2002-01-09', 1000, 222),
+        ('Bruno', '2008-11-09', 1500, 4),
         ('Daniela', '2009-12-09', 2200, 5),
-        ('Elisa', '2003-10-08', 1900, 333),
-        ('Fabio', '2015-10-05', 1300, 7),
+        ('Fabio', '2003-10-08', 1900, 333),
+        ('Elisa', '2015-10-05', 1300, 7),
         ('Gustavo', '2016-10-04', 3200, 6);
         
-
+    /*1*/    
     select * from Servidor order by id_matricula;
+    
+    /*2*/
     select count(nome) from Servidor;
     
-    select nome, data_servico, min(10), max(12) from Servidor;
+    /*3*/
+    select nome
+    from Servidor
+    where datediff(curdate(), data_servico) between 3650 and 4380;
     
+    /*4*/
     select nome, id_matricula, salario, min(salario)
     from Servidor
-    where salario = 1000;
+    where salario = 1000
+    group by id_matricula;
     
-    select nome, data_servico, min(05) from Servidor;
+    /*5*/
+    select nome
+    from Servidor
+    where datediff(curdate(), data_servico) = 1825;
     
-    select nome, id_matricula, salario, min(salario)
+    /*6*/
+    select nome, id_matricula, salario
     from Servidor
     order by nome;
     
+    /*7*/
     select data_servico, id_matricula, nome, salario
     from Servidor 
     order by data_servico desc;
     
-	select nome, salario, max(salario)
+    /*8*/
+	select nome, salario
     from Servidor
-    having count(*) > 1;
+    group by id_matricula
+    order by salario desc;
     
+    /*9*/
     select nome, avg(salario)
     from Servidor
-    having avg(salario);
+    group by id_matricula
+    order by avg(salario);
     
-    select nome, min(salario)
-    from Servidor;
-    
-    select nome, id_matricula, cod_org
-    from Servidor;
-    
-	select cod_org, sum(salario)
-    from Servidor;
-    
-    select nome 
+    /*10*/
+    select nome, min(salario) as menor_salario
     from Servidor
+    group by id_matricula
+    order by salario;
+    
+    /*11*/
+    select id_matricula, nome, cod_org
+    from Servidor
+	group by id_matricula;
+    
+    /*12*/
+	select sum(salario) as somatotal_salario
+    from Servidor;
+    
+    /*13*/
+    select cod_dept, nome_dept
+    from Departamento
+    where nome_dept = 'RH'
+    group by cod_dept;
+    ;
+    
+    /*14*/
+    select id_matricula, min(salario), cod_org
+    from Servidor 
+    where cod_org = 222
+    group by id_matricula;
+    
+    /*15*/
+    select cod_org, avg(salario)
+    from Servidor
+    where cod_org = 333
     group by cod_org;
     
-    select id_matricula, min(salario)
-    from Servidor group by cod_org = 222;
-    
-    select cod_org, avg(salario)
-    from Servidor group by cod_org = 333;
-    
-    select cod_org, min(salario), max(salario)
+    /*16*/
+    select nome, min(salario), max(salario)
     from Servidor
     group by nome;
     
-    select nome, max(salario) 
-    from Servidor
-    where data_servico = '2004-03-03'
-    group by data_servico;
+    /*17*/
+    select max(salario), nome_dept
+    from Servidor, Departamento
+    where data_servico >= '2004-03-03'
+    group by nome_dept;
     
-    select avg(salario) from Servidor
-    group by cod_org
+    /*18*/
+    select nome_dept, avg(salario) as media_salario
+    from Servidor, Departamento
+    group by nome_dept
     having avg(salario) > 560;
     
-    select nome, max(salario) from Servidor
-    group by cod_org
-    having nome >= 3;
+    /*19*/
+    select nome_dept, max(salario) 
+    from Servidor, Departamento
+    group by nome_dept
+    having count(*) > 3;
     
-    select nome, salario * qtd_Servidor
-    from Servidor;
+    /*20*/
+    select nome, salario * count(*) as total_salario
+    from Servidor
+    group by nome, salario;

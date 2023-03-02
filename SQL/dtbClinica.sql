@@ -100,3 +100,22 @@ insert into Consulta(
         (4, 4, '2022-06-22', '19:30');
         select * from Consulta;
        
+update Paciente set cidade = "Ilhota" where nome = "Paulo";
+update Paciente set cidade = "Ilhota" where codp = 2;
+select * from Paciente;
+
+update Consulta set hora = '12:00', data_cons = '2023-07-04' where cod_pac = 4;
+select * from Consulta;
+
+update Paciente set doenca = "sarampo" where nome = "Ana";
+update Paciente set doenca = "sarampo" where codp = 1;
+
+update Consulta set hora = '14:30' where cod_med = 3 and cod_pac = 4;
+
+delete from Consulta where cod_pac = 4;
+delete from Paciente where codp = 4;
+
+delete from Consulta where hora = '19:30';
+
+update Medico set especialidade = "Clino Geral" where nome = "Pedro";
+select * from Medico;
