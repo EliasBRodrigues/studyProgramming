@@ -180,7 +180,7 @@
 		<input class="button" type="submit" value="Calcular">
     <?php
         if(isset($_POST['nome']) && isset($_POST['year'])
-         && isset($_POST['height'])&& isset($_POST['height'])) {
+         && isset($_POST['weight'])&& isset($_POST['height'])) {
             $name = $_POST['nome'];
             $year = $_POST['year'];
             $born = (date("Y") - $year);
